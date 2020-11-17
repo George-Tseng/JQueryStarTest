@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+    <meta charset="utf-8">
+    <title>jQueryTest 1</title>
+</head>
+<body>
+    <div id="container">
+        <img id="img1" class="i" src="image/startStar.gif" />
+        <img id="img2" class="i" src="image/startStar.gif" />
+        <img id="img3" class="i" src="image/startStar.gif" />
+        <img id="img4" class="i" src="image/startStar.gif" />
+        <img id="img5" class="i" src="image/startStar.gif" />
+        <hr />
+        <span id="msg"></span>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script>
+            let onOff = true;
+            $("img").mouseover(function(){
+                onOff = true;
+                $(this).nextAll().prop("src", "image/startStar.gif");
+                $(this).prop("src", "image/changeStar.gif");
+                $(this).prevAll().prop("src", "image/changeStar.gif");
+                $("#msg").html("打分中...，你給了"+($(this).index()+1)+"分");
+            }).mouseout(function(){
+                if(onOff){
+                    $(this).prop("src", "image/startStar.gif");
+                    $(this).prevAll().prop("src", "image/startStar.gif");
+                }
+            }).click(function(){
+                onOff = (onOff) ? false : true;
+                if(!onOff) {
+                    $("#msg").html("你給了"+($(this).index()+1)+"分");
+                }
+            });        
+        </script>
+    </div>  
+</body>  
+</html>
